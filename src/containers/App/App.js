@@ -1,10 +1,11 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import Navbar from './../../components/Navbar';
+import Navbar from './../../containers/Navbar';
 import Cards from './../../components/Cards';
+import AddForm from './../../containers/AddForm';
 
-const App = ({ tasks }) => {
+const App = ({ tasks, addPopup }) => {
   const tasks1 = tasks.filter((x) => x.state === '1') || [];
   const tasks2 = tasks.filter((x) => x.state === '2') || [];
   const tasks3 = tasks.filter((x) => x.state === '3') || [];
@@ -12,6 +13,7 @@ const App = ({ tasks }) => {
   return (
     <div className="ui container">
       <Navbar />
+      {addPopup ? <AddForm /> : null}
 
       <div className="ui three column grid">
         <div className="column">
@@ -42,10 +44,12 @@ const App = ({ tasks }) => {
 
 App.propTypes = {
   tasks: PropTypes.array.isRequired,
+  addPopup: PropTypes.bool.isRequired,
 };
 
 const mapStateTpProps = (state) => ({
   tasks: state.tasks,
+  addPopup: state.ui.addPopup,
 });
 
 export default connect(mapStateTpProps)(App);

@@ -5,4 +5,7 @@ export const saveTasks = (tasks) => ({
   tasks,
 });
 
-export const b = () => {};
+export const saveNewTask = (task) => ({
+  type: constants.SAVE_NEW_TASK,
+  task,
+});

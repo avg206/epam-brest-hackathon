@@ -1,3 +1,9 @@
 export const SAVE_SOCKET_INSTANCE = 'SAVE_SOCKET_INSTANCE';
 
 export const SAVE_TASKS = 'SAVE_TASKS';
+export const SAVE_NEW_TASK = 'SAVE_NEW_TASK';
+
+export const OPEN_ADD_FORM = 'OPEN_ADD_FORM';
+export const CLOSE_ADD_FORM = 'CLOSE_ADD_FORM';
+
+export const SAVE_ASSIGMENTS = 'SAVE_ASSIGMENTS';

@@ -7,6 +7,9 @@ export default (state = initialState, action) => {
     case constants.SAVE_TASKS:
       return [...action.tasks];
 
+    case constants.SAVE_NEW_TASK:
+      return [...state, action.task];
+
     default:
       return state;
   }

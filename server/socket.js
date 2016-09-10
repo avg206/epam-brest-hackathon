@@ -1,4 +1,6 @@
 import socket from 'socket.io';
+import moment from 'moment';
+
 import Task from '../model/task';
 import config from '../config/assigne.json';
 
@@ -9,10 +11,22 @@ io.on('connect', async(so) => {
   so.emit('tasks', tasks);
   so.emit('assigne', config);
 
+<<<<<<< HEAD
   so.on('new task', async(newTask) => {
     let task = new Task(newTask);
     task = await task.save();
     io.emit('new task', task);
+=======
+  so.on('new task', (newTask) => {
+    const task = new Task({
+      ...newTask,
+      time: moment().format(),
+      state: 1,
+    });
+    task.save();
+
+    io.emit('new task', newTask);
+>>>>>>> 097e078e5bf4676dc9c507b718b9fefe48198051
   });
 
   so.on('delete task', async(id) => {
