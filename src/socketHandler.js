@@ -1,6 +1,10 @@
+import cookie from 'js-cookie';
+
 import * as actions from './actions';
 
 export default (store, socket) => {
+  socket.emit('new user', cookie.get('clientToken'));
+
   socket.on('tasks', (tasks) => {
     store.dispatch(actions.saveTasks(tasks));
   });

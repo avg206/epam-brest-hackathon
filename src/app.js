@@ -7,11 +7,16 @@ import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
 import socketIO from 'socket.io-client';
+import cookie from 'js-cookie';
 
 import { saveSocketInstance } from './actions';
 import helpApp from './reducers';
 import App from './containers/App/';
 import socketHandler from './socketHandler.js';
+
+if (!cookie.get('clientToken')) {
+  document.location.href = '/login';
+}
 
 const loggerMiddleware = createLogger();
 
