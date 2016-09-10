@@ -2,10 +2,13 @@ const autoprefixer = require('autoprefixer');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
+const webpack = require('webpack');
 
 module.exports = {
   entry: [
-    'babel-polyfill', path.join(__dirname, '../src/app'),
+    'babel-polyfill',
+    'webpack-hot-middleware/client',
+    path.join(__dirname, '../src/app'),
   ],
 
   output: {
@@ -28,6 +31,7 @@ module.exports = {
         test: /\.jsx?$/,
         exclude: /(node_modules|bower_components)/,
         loader: 'babel',
+        include: path.join(__dirname, '/../src'),
       },
       {
         test: /\.svg$/,
@@ -59,5 +63,8 @@ module.exports = {
       filename: 'index.html',
       template: path.join(__dirname, '../src/index.html'),
     }),
+    new webpack.HotModuleReplacementPlugin(),
+    new webpack.NoErrorsPlugin(),
   ],
+
 };
