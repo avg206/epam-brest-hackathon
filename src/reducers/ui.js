@@ -12,7 +12,6 @@ export default (state = initialState, action) => {
     case constants.CLOSE_ADD_FORM:
       return { ...state, addPopup: false };
 
-    default:
-      return state;
+    default: return state;
   }
 };

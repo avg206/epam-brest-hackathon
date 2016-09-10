@@ -10,7 +10,7 @@ const io = socket();
 const authentication = (token) => jwt.verify(token, 'task');
 
 io.on('connect', (so) => {
-  so.on('new user', async(coockie) => {
+  so.on('new user', async (coockie) => {
     const check = authentication(coockie);
     if (!check._doc) return;
 

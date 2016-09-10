@@ -7,7 +7,6 @@ export default (state = initialState, action) => {
     case constants.SAVE_ASSIGMENTS:
       return [...action.assigments];
 
-    default:
-      return state;
+    default: return state;
   }
 };

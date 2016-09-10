@@ -5,4 +5,7 @@ export const saveSocketInstance = (socket) => ({
   socket,
 });
 
-export const a = () => {};
+export const saveUserName = (name) => ({
+  type: constants.SAVE_USER_NAME,
+  name,
+});

@@ -20,12 +20,12 @@ const Card = (props) => {
 
 
   return (
-    <div className="ui card">
+    <div className="ui fluid card">
       <div className="content">
         <div className="header">{props.task.title}</div>
         <div className="meta">
           <span className="right floated time">{moment(props.task.time).fromNow()}</span>
-          <a>Anatoli Huseu1</a>
+          <a>{props.task.creator}</a>
         </div>
         <div className="description">
           <p>{props.task.text}</p>

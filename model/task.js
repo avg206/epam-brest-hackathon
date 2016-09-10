@@ -7,7 +7,7 @@ const Schema = mongoose.Schema;
 const Task = new Schema({
   category: String,
   assigne: String,
-  creater: String,
+  creator: String,
   title: String,
   text: String,
   time: String,

@@ -28,7 +28,7 @@ const store = createStore(
   )
 );
 
-const socket = socketIO('https://localhost:3500');
+const socket = socketIO('/');
 socketHandler(store, socket);
 store.dispatch(saveSocketInstance(socket));
 

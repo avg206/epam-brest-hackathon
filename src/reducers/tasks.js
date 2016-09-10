@@ -16,7 +16,6 @@ export default (state = initialState, action) => {
     case constants.REMOVE_DELETED_TASK:
       return state.filter((task) => task._id !== action.id);
 
-    default:
-      return state;
+    default: return state;
   }
 };

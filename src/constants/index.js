@@ -1,5 +1,7 @@
 export const SAVE_SOCKET_INSTANCE = 'SAVE_SOCKET_INSTANCE';
 
+export const SAVE_USER_NAME = 'SAVE_USER_NAME';
+
 export const SAVE_TASKS = 'SAVE_TASKS';
 export const SAVE_NEW_TASK = 'SAVE_NEW_TASK';
 export const SAVE_UPDATED_TASK = 'SAVE_UPDATED_TASK';

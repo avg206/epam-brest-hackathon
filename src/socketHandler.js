@@ -5,6 +5,10 @@ import * as actions from './actions';
 export default (store, socket) => {
   socket.emit('new user', cookie.get('clientToken'));
 
+  socket.on('user name', (name) => {
+    store.dispatch(actions.saveUserName(name));
+  });
+
   socket.on('tasks', (tasks) => {
     store.dispatch(actions.saveTasks(tasks));
   });

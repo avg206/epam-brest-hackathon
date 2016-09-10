@@ -7,7 +7,6 @@ export default (state = initialState, action) => {
     case constants.SAVE_SOCKET_INSTANCE:
       return action.socket;
 
-    default:
-      return state;
+    default: return state;
   }
 };

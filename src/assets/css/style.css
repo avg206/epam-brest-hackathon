@@ -18,3 +18,7 @@ body {
   text-align: center;
   margin: 0 0 20px;
 }
+
+.column-title a {
+  margin: 0!important;
+}

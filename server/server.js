@@ -49,21 +49,21 @@ require('./passport')(passport);
 app.get('/login',
   passport.authenticate('saml',
     {
-      successRedirect: 'https://localhost:3500/',
-      failureRedirect: 'https://localhost:3500/aaa',
+      successRedirect: '/',
+      failureRedirect: '/',
     })
 );
 
 app.post('/saml',
   passport.authenticate('saml',
     {
-      failureRedirect: 'https://localhost:3500/aaa',
+      failureRedirect: '/',
       failureFlash: true,
     }),
   (req, res) => {
     const token = getCoockieToken(req.user);
     res.cookie('clientToken', token, { maxAge: 100 * 24 * 60 * 60 * 1000, httpsOnly: true });
-    res.redirect('https://localhost:3500/');
+    res.redirect('/');
   }
 );
 

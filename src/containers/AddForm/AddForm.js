@@ -27,11 +27,15 @@ class AddForm extends Component {
 
   saveTask() {
     const assigment = this.props.assigments.find((item) => item.name === this.state.category) || {};
-
-    this.props.addNewTask({
+    const data = {
       ...this.state,
       assigne: assigment.user,
-    });
+      creator: this.props.name,
+    };
+
+    console.log(data);
+
+    this.props.addNewTask(data);
     this.props.closeForm();
   }
 
@@ -83,10 +87,12 @@ AddForm.propTypes = {
   closeForm: PropTypes.func.isRequired,
   addNewTask: PropTypes.func.isRequired,
   assigments: PropTypes.array.isRequired,
+  name: PropTypes.string.isRequired,
 };
 
 const mapStateToProps = (state) => ({
   assigments: state.assigments,
+  name: state.user.name,
 });
 const mapDispatchToProps = (dispatch) => ({
   closeForm: () => dispatch(closeAddForm()),
