@@ -37,19 +37,18 @@ if (NODE_ENV === 'production') {
   app.use(webpackHotMiddleware(compiler));
 }
 
-const passportConfig = require('../config/configPassport');
-require('./passport')(passport, passportConfig);
+require('./passport')(passport);
 
-app.get('/api/epamlogin',
-  passport.authenticate(passportConfig.passport.strategy,
+app.get('/login',
+  passport.authenticate('saml',
     {
       successRedirect: 'https://localhost:3400/',
       failureRedirect: 'https://localhost:3400/',
     })
 );
 
-app.post(passportConfig.passport.saml.path,
-  passport.authenticate(passportConfig.passport.strategy,
+app.post('/api/saml',
+  passport.authenticate('saml',
     {
       failureRedirect: 'https://localhost:3400/',
       failureFlash: true,
@@ -57,7 +56,7 @@ app.post(passportConfig.passport.saml.path,
   (req, res) => {
     const token = getCoockieToken(req.user);
     res.cookie('clientToken', token, { maxAge: 100 * 24 * 60 * 60 * 1000, httpsOnly: true });
-    res.redirect('/');
+    res.redirect('https://localhost:3400/');
   }
 );
 
