@@ -1,7 +1,7 @@
 import * as constants from '../constants';
 
 const initialState = {
-  addPopup: true,
+  addPopup: false,
 };
 
 export default (state = initialState, action) => {
