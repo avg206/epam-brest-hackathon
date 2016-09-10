@@ -11,8 +11,7 @@ import webpackConfig from '../webpack';
 
 const app = express();
 const NODE_ENV = process.env.NODE_ENV;
-const secret = 'task';
-const tokenCreation = (obj, time) => jwt.sign(obj, secret, {
+const tokenCreation = (obj, time) => jwt.sign(obj, 'task', {
   expiresIn: time,
 });
 const getCoockieToken = (model) => {
