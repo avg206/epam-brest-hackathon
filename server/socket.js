@@ -1,4 +1,6 @@
 import socket from 'socket.io';
+import moment from 'moment';
+
 import Task from '../model/task';
 import config from '../config/assigne.json';
 
@@ -12,8 +14,13 @@ io.on('connect', (so) => {
     });
 
   so.on('new task', (newTask) => {
-    const task = new Task(newTask);
+    const task = new Task({
+      ...newTask,
+      time: moment().format(),
+      state: 1,
+    });
     task.save();
+
     io.emit('new task', newTask);
   });
 
