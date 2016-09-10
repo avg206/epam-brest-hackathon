@@ -1,4 +1,4 @@
-{
-  "Alena Orgish": "Stationery",
-  "Ivan Danilevich": "IT"
-}
+[
+  {"user": "Alena Orgish", "name": "Stationery"},
+  {"user": "Ivan Danilevich", "name": "IT"}
+]
