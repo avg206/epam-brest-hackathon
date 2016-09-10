@@ -37,7 +37,7 @@ io.on('connect', (so) => {
     });
 
     so.on('update task', async(update) => {
-      const task = await Task.findOneAndUpdate({ _id: update.id }, update, { new: true });
+      const task = await Task.findOneAndUpdate({ _id: update._id }, update, { new: true });
       if (!task) so.emit('error', 'Task deleted');
       else io.emit('update task', task);
     });

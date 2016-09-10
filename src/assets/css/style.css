@@ -6,6 +6,14 @@ body {
   height: 37px!important;
 }
 
+.category-title {
+  text-align: center;
+  font-size: 1rem;
+  width: 100%;
+  color: #333;
+  display: block;
+}
+
 .column-title {
   text-align: center;
   margin: 0 0 20px;

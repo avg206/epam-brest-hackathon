@@ -1,12 +1,33 @@
 import React, { PropTypes } from 'react';
+import { connect } from 'react-redux';
+
+import { moveTaskToProgress, moveTaskToTODO, moveTaskToDone, deleteTask } from '../../actions';
 
 const CardFooter = (props) => {
+  const moveToProgress = () => {
+    props.dispatch(moveTaskToProgress(props.task));
+  };
+
+  const moteToTODO = () => {
+    props.dispatch(moveTaskToTODO(props.task));
+  };
+
+  const moteToDone = () => {
+    props.dispatch(moveTaskToDone(props.task));
+  };
+
+  const deleteTaskAction = () => {
+    props.dispatch(deleteTask(props.task));
+  };
+
   switch (parseInt(props.task.state, 10)) {
     case 1:
       return (
         <div className="extra content">
           <div className="ui two buttons">
-            <div className="ui basic green button">Move to Progress</div>
+            <div className="ui basic green button" onClick={moveToProgress}>
+              Move to Progress
+            </div>
           </div>
         </div>
       );
@@ -15,8 +36,8 @@ const CardFooter = (props) => {
       return (
         <div className="extra content">
           <div className="ui two buttons">
-            <div className="ui basic green button">Done</div>
-            <div className="ui basic red button">Move To ToDo</div>
+            <div className="ui basic green button" onClick={moteToDone}>Done</div>
+            <div className="ui basic red button" onClick={moteToTODO}>Move To ToDo</div>
           </div>
         </div>
       );
@@ -25,8 +46,8 @@ const CardFooter = (props) => {
       return (
         <div className="extra content">
           <div className="ui two buttons">
-            <div className="ui basic green button">Approve</div>
-            <div className="ui basic red button">Decline</div>
+            <div className="ui basic green button" onClick={deleteTaskAction}>Approve</div>
+            <div className="ui basic red button" onClick={moteToTODO}>Decline</div>
           </div>
         </div>
       );
@@ -37,6 +58,14 @@ const CardFooter = (props) => {
 
 CardFooter.propTypes = {
   task: PropTypes.object.isRequired,
+  dispatch: PropTypes.func.isRequired,
 };
 
-export default CardFooter;
+const mapStateToProps = (state, ownProps) => ({
+  ...ownProps,
+});
+const mapDispatchToProps = (dispatch) => ({
+  dispatch,
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(CardFooter);

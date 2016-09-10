@@ -26,15 +26,19 @@ class AddForm extends Component {
   }
 
   saveTask() {
-    this.props.addNewTask(this.state);
+    const assigment = this.props.assigments.find((item) => item.name === this.state.category) || {};
+
+    this.props.addNewTask({
+      ...this.state,
+      assigne: assigment.user,
+    });
+    this.props.closeForm();
   }
 
   render() {
     let options = [{ name: '---' }].concat(this.props.assigments);
     options = options
       .map((item, index) => <option key={index} value={item.name}>{item.name}</option>);
-
-    console.log(this.state);
 
     return (
       <div className="ui dimmer modals page transition visible active" style={topStyle}>
@@ -77,6 +81,7 @@ class AddForm extends Component {
 
 AddForm.propTypes = {
   closeForm: PropTypes.func.isRequired,
+  addNewTask: PropTypes.func.isRequired,
   assigments: PropTypes.array.isRequired,
 };
 

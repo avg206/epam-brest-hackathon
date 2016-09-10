@@ -16,8 +16,11 @@ const Card = (props) => (
       </div>
     </div>
     <div className="extra content">
+      <strong className="category-title">{props.task.category}</strong>
+    </div>
+    <div className="extra content">
       <span className="right floated time">
-        <i className="user icon" /> Alena Orgish
+        <i className="user icon" /> {props.task.assigne}
       </span>
       <strong>Assigned:</strong>
     </div>
