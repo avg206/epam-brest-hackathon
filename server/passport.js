@@ -18,19 +18,16 @@ module.exports = (passport) => {
   passport.use(new Strategy(saml, async(profile, done) => {
     const name = profile['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'];
 
-    const user = await User.findOne({ name });
+    let user = await User.findOne({ name });
 
-    if (user) {
-      return done(null, user);
+    if (!user) {
+      user = new User({
+        name: profile['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
+        epamID: `${profile['http://epam.com/claims/pmcid']}`,
+      });
+      user = await user.save();
     }
 
-    let newUser = new User({
-      name: profile['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
-      epamID: `${profile['http://epam.com/claims/pmcid']}`,
-    });
-
-    newUser = await newUser.save();
-
-    return done(null, newUser);
+    return done(null, user);
   }));
 };
