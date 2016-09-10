@@ -5,11 +5,11 @@ const path = require('path');
 
 module.exports = {
   entry: [
-    'babel-polyfill', path.join(__dirname, '../src/index'),
+    'babel-polyfill', path.join(__dirname, '../src/app'),
   ],
 
   output: {
-    path: path.join(__dirname, '../../public'),
+    path: path.join(__dirname, '../public'),
     filename: '[name].js',
     publicPath: '/',
   },
