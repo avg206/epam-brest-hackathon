@@ -14,6 +14,6 @@ const serverApp = https.createServer({
   key: fs.readFileSync('./ssl/key.pem'),
   cert: fs.readFileSync('./ssl/cert.pem'),
   passphrase: 'qwerty',
-}, server).listen(3400, () => console.log('Server listen port 3400'));
+}, server).listen(3500, () => console.log('Server listen port 3500'));
 
 socket.listen(serverApp);

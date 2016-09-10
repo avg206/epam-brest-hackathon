@@ -2,6 +2,8 @@ import express from 'express';
 import webpack from 'webpack';
 import passport from 'passport';
 import jwt from 'jsonwebtoken';
+import bodyParser from 'body-parser';
+import cookieParser from 'cookie-parser';
 import webpackDevMiddleware from 'webpack-dev-middleware';
 import webpackHotMiddleware from 'webpack-hot-middleware';
 
@@ -25,6 +27,12 @@ const getCoockieToken = (model) => {
   return tokenCreation(generateTokenUser, expires);
 };
 
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: true }));
+app.use(bodyParser.json({ limit: '10mb' }));
+app.use(cookieParser());
+app.use(passport.initialize());
+app.use(passport.session());
+
 if (NODE_ENV === 'production') {
   app.use(express.static(`${__dirname}/../public`));
 } else {
@@ -42,21 +50,21 @@ require('./passport')(passport);
 app.get('/login',
   passport.authenticate('saml',
     {
-      successRedirect: 'https://localhost:3400/',
-      failureRedirect: 'https://localhost:3400/',
+      successRedirect: 'https://localhost:3500/',
+      failureRedirect: 'https://localhost:3500/aaa',
     })
 );
 
-app.post('/api/saml',
+app.post('/saml',
   passport.authenticate('saml',
     {
-      failureRedirect: 'https://localhost:3400/',
+      failureRedirect: 'https://localhost:3500/aaa',
       failureFlash: true,
     }),
   (req, res) => {
     const token = getCoockieToken(req.user);
     res.cookie('clientToken', token, { maxAge: 100 * 24 * 60 * 60 * 1000, httpsOnly: true });
-    res.redirect('https://localhost:3400/');
+    res.redirect('https://localhost:3500/');
   }
 );
 
