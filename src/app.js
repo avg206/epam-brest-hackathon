@@ -6,9 +6,12 @@ import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import thunkMiddleware from 'redux-thunk';
 import createLogger from 'redux-logger';
+import socketIO from 'socket.io-client';
 
+import { saveSocketInstance } from './actions';
 import helpApp from './reducers';
 import App from './containers/App/';
+import socketHandler from './socketHandler.js';
 
 const loggerMiddleware = createLogger();
 
@@ -19,6 +22,11 @@ const store = createStore(
     loggerMiddleware
   )
 );
+
+const socket = socketIO('https://localhost:3400');
+socketHandler(store, socket);
+store.dispatch(saveSocketInstance(socket));
+
 
 render(
   <Provider store={store}>

@@ -5,6 +5,9 @@ const Navbar = () => (
     <div className="header item">
       Office Help Desk
     </div>
+    <div className="right menu">
+      <a className="item"><i className="plus icon" /> Add Item</a>
+    </div>
   </div>
 );
 
