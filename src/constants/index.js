@@ -1,0 +1,3 @@
+export const SAVE_SOCKET_INSTANCE = 'SAVE_SOCKET_INSTANCE';
+
+export const SAVE_TASKS = 'SAVE_TASKS';

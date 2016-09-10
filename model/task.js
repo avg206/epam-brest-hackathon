@@ -8,7 +8,8 @@ const Task = new Schema({
   category: String,
   assigne: String,
   creater: String,
-  task: String,
+  title: String,
+  text: String,
   time: String,
   state: String,
 });
