@@ -26,7 +26,12 @@ class AddForm extends Component {
   }
 
   saveTask() {
-    this.props.addNewTask(this.state);
+    const assigment = this.props.assigments.find((item) => item.name === this.state.category) || {};
+
+    this.props.addNewTask({
+      ...this.state,
+      assigne: assigment.user,
+    });
     this.props.closeForm();
   }
 
