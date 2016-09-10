@@ -7,6 +7,7 @@ const webpack = require('webpack');
 module.exports = {
   entry: [
     'babel-polyfill',
+    'react-hot-loader/patch',
     'webpack-hot-middleware/client',
     path.join(__dirname, '../src/app'),
   ],
@@ -44,6 +45,11 @@ module.exports = {
       {
         test: /\.css$/,
         loader: 'style-loader!postcss-loader!css-loader',
+      },
+      {
+        test: /\.scss$/,
+        include: /src/,
+        loader: 'style-loader!sass-loader!css-loader',
       },
     ],
   },
