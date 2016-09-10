@@ -2,6 +2,10 @@ body {
   padding: 60px 0 0 0;
 }
 
+.form-select {
+  height: 37px!important;
+}
+
 .column-title {
   text-align: center;
   margin: 0 0 20px;
