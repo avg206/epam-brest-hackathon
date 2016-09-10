@@ -1,6 +1,1 @@
-markup/**
 node_modules/**
-frontend/dist/**
-game-engine/node_modules/**
-game-engine/tmp_*/**
-sdk/**
