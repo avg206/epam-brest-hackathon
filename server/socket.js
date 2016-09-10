@@ -11,10 +11,25 @@ io.on('connect', (so) => {
       so.emit('assigne', config);
     });
 
-  socket.on('new task', (newTask) => {
+  so.on('new task', (newTask) => {
     const task = new Task(newTask);
     task.save();
     io.emit('new task', newTask);
+  });
+
+  so.on('delete task', (id) => {
+    Task.findOneAndRemove(id)
+      .then(() => {
+        io.emit('delete task', id);
+      });
+  });
+
+  so.on('update task', (update) => {
+    Task.findOneAndUpdate({ _id: update.id }, update, { new: true })
+      .then((task) => {
+        if (!task) so.emit('error', 'Task deleted');
+        else io.emit('update task', task);
+      });
   });
 });
 
