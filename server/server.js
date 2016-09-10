@@ -1,7 +1,8 @@
+import socket from './socket';
+import express from 'express';
 
+const app = express();
+app.listen(3400, () => console.log('Server listen 3400'));
 
-
-
-export default () => {
-  // Here init server
-};
+socket.listen(app);
+export default app;
