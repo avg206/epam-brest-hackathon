@@ -8,6 +8,7 @@ import config from '../config/assigne.json';
 const io = socket();
 
 const authentication = (token) => jwt.verify(token, 'task');
+const checkUser = (name, nameReq) => name === nameReq;
 
 io.on('connect', (so) => {
   so.on('new user', async (coockie) => {
@@ -21,6 +22,8 @@ io.on('connect', (so) => {
     so.emit('assigne', config);
 
     so.on('new task', async(newTask) => {
+      if (!checkUser(name, newTask.name)) return;
+
       let task = new Task({
         ...newTask,
         time: moment().format(),
@@ -32,14 +35,23 @@ io.on('connect', (so) => {
     });
 
     so.on('delete task', async(id) => {
-      await Task.findOneAndRemove(id);
+      const deleteTask = await Task.findOne(id);
+
+      if (!checkUser(name, deleteTask.creator)) return;
+
+      await deleteTask.remove();
       io.emit('delete task', id);
     });
 
     so.on('update task', async(update) => {
-      const task = await Task.findOneAndUpdate({ _id: update._id }, update, { new: true });
+      let task = await Task.findOne({ _id: update._id });
+
       if (!task) so.emit('error', 'Task deleted');
-      else io.emit('update task', task);
+      if (!checkUser(name, task.creator) || !checkUser(name, task.assigne)) return;
+
+      task = Object.assigne({}, task._doc, update);
+      await task.save();
+      io.emit('update task', task);
     });
   });
 });

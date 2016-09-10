@@ -5,9 +5,9 @@ module.exports = (passport) => {
   const saml = {
     path: '/saml',
     protocol: 'https://',
-    host: '10.26.160.11:3500/',
+    host: 'localhost:3500/',
     entryPoint: 'https://login-prod.epm-sso.projects.epam.com/adfs/ls/idpinitiatedsignon',
-    issuer: 'https://10.26.160.11:3500/',
+    issuer: 'https://localhost:3500/',
     signatureAlgorithm: 'SHA-256',
     disableRequestedAuthnContext: true,
   };
@@ -24,6 +24,7 @@ module.exports = (passport) => {
     if (!user) {
       user = new User({
         name: profile['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'],
+        email: profile['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/email'],
         epamID: `${profile['http://epam.com/claims/pmcid']}`,
       });
       user = await user.save();
