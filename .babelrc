@@ -1,0 +1,28 @@
+{
+  "presets": ["es2015", "stage-0", "react"],
+
+  "plugins": [
+    "transform-decorators-legacy",
+    "transform-react-constant-elements",
+    "transform-react-inline-elements"
+  ],
+
+  "env": {
+    "development": {
+      "plugins": [
+        ["react-transform", {
+          "transforms": [{
+            "transform": "react-transform-hmr",
+            "imports": ["react"],
+            "locals": ["module"]
+          }]
+        }]
+      ]
+    },
+    "production": {
+      "plugins": [
+        "transform-react-remove-prop-types"
+      ]
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "env": {
+    "jquery": true,
+    "mocha": true,
+    "worker": true
+  },
+  "parser": "babel-eslint",
+  "parserOptions": {
+    "ecmaVersion": 6,
+    "ecmaFeatures": {
+      "experimentalObjectRestSpread": true
+    }
+  },
+  "extends": "airbnb",
+  "rules": {
+    "no-console": 0,
+    "no-underscore-dangle": 0,
+    "no-confusing-arrow": ["error", {"allowParens": true}]
+  }
+}
