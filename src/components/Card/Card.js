@@ -1,4 +1,5 @@
 import React, { PropTypes } from 'react';
+import moment from 'moment';
 
 import CardFooter from './CardFooter.js';
 
@@ -7,7 +8,7 @@ const Card = (props) => (
     <div className="content">
       <div className="header">{props.task.title}</div>
       <div className="meta">
-        <span className="right floated time">2 days ago</span>
+        <span className="right floated time">{moment(props.task.time).fromNow()}</span>
         <a>Anatoli Huseu1</a>
       </div>
       <div className="description">
