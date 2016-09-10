@@ -23,5 +23,5 @@ const store = createStore(
 render(
   <Provider store={store}>
     <App />
-  </Provider>, document.getElementById('content')
+  </Provider>, document.getElementById('root')
 );
