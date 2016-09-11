@@ -15,6 +15,24 @@ const App = ({ tasks, addPopup }) => {
       <Navbar />
       {addPopup ? <AddForm /> : null}
 
+      <div className="top-filter">
+        <div className="ui tiny compact menu">
+          <a className="item">
+            All tasks
+          </a>
+          <a className="item">
+            Common tasks
+          </a>
+          <a className="item">
+            My tasks
+          </a>
+          <a className="item">
+            Assigned to me tasks
+          </a>
+        </div>
+      </div>
+
+
       <div className="ui three column grid">
         <div className="column">
           <div className="column-title">
@@ -48,7 +66,7 @@ App.propTypes = {
 };
 
 const mapStateTpProps = (state) => ({
-  tasks: state.tasks,
+  tasks: state.tasks.list,
   addPopup: state.ui.addPopup,
 });
 

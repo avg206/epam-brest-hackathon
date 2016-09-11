@@ -22,3 +22,9 @@ body {
 .column-title a {
   margin: 0!important;
 }
+
+.top-filter {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 30px;
+}
