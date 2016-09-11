@@ -47,11 +47,11 @@ io.on('connect', (so) => {
 
     so.on('new task', async(newTask) => {
       if (!checkUser(name, newTask)) return;
-
+      const state = newTask.assigne ? 1 : 0;
       let task = new Task({
         ...newTask,
+        state,
         time: moment().format(),
-        state: 1,
       });
 
       task = await task.save();

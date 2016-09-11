@@ -50,4 +50,8 @@ export const moveTaskToDone = (task) => (dispatch, getState) => {
   socket.emit('update task', { ...task, state: 3 });
 };
 
+export const assigne = (task) => (dispatch, getState) => {
+  const { socket, user } = getState();
 
+  socket.emit('update task', { ...task, assigne: user.name, state: 1 });
+};
