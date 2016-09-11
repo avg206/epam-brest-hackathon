@@ -22,7 +22,7 @@ io.on('connect', (so) => {
     so.emit('assigne', config);
 
     so.on('new task', async(newTask) => {
-      if (!checkUser(name, newTask.name)) return;
+      if (!checkUser(name, newTask.creator)) return;
 
       let task = new Task({
         ...newTask,

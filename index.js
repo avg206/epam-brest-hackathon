@@ -8,7 +8,7 @@ const mongoose = require('mongoose');
 const server = require('./server/server').default;
 const socket = require('./server/socket').default;
 
-mongoose.connect('mongodb://127.0.0.1:27017/hackathon');
+mongoose.connect('mongodb://localhost:27017/hackathon');
 
 const serverApp = https.createServer({
   key: fs.readFileSync('./ssl/key.pem'),
