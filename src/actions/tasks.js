@@ -20,6 +20,11 @@ export const removeDeletedTask = (id) => ({
   id,
 });
 
+export const setTasksFilter = (filter) => ({
+  type: constants.SET_TASKS_FILTER,
+  filter,
+});
+
 export const addNewTask = (task) => (dispatch, getState) => {
   const { socket } = getState();
 

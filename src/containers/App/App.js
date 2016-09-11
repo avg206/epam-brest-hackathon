@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import Navbar from './../../containers/Navbar';
 import Cards from './../../components/Cards';
 import AddForm from './../../containers/AddForm';
+import TasksFilter from './../../containers/TasksFilter';
 
 const App = ({ tasks, addPopup }) => {
   const tasks1 = tasks.filter((x) => x.state === '1') || [];
@@ -15,23 +16,7 @@ const App = ({ tasks, addPopup }) => {
       <Navbar />
       {addPopup ? <AddForm /> : null}
 
-      <div className="top-filter">
-        <div className="ui tiny compact menu">
-          <a className="item">
-            All tasks
-          </a>
-          <a className="item">
-            Common tasks
-          </a>
-          <a className="item">
-            My tasks
-          </a>
-          <a className="item">
-            Assigned to me tasks
-          </a>
-        </div>
-      </div>
-
+      <TasksFilter />
 
       <div className="ui three column grid">
         <div className="column">

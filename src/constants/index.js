@@ -7,6 +7,8 @@ export const SAVE_NEW_TASK = 'SAVE_NEW_TASK';
 export const SAVE_UPDATED_TASK = 'SAVE_UPDATED_TASK';
 export const REMOVE_DELETED_TASK = 'REMOVE_DELETED_TASK';
 
+export const SET_TASKS_FILTER = 'SET_TASKS_FILTER';
+
 export const OPEN_ADD_FORM = 'OPEN_ADD_FORM';
 export const CLOSE_ADD_FORM = 'CLOSE_ADD_FORM';
 

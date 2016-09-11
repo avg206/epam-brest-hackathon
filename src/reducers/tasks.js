@@ -2,6 +2,7 @@ import * as constants from '../constants';
 
 const initialState = {
   list: [],
+  filter: 0,
 };
 
 export default (state = initialState, action) => {
@@ -23,6 +24,13 @@ export default (state = initialState, action) => {
         ...state,
         list: state.list.filter((task) => task._id !== action.id),
       };
+
+    case constants.SET_TASKS_FILTER:
+      return {
+        ...state,
+        filter: action.filter,
+      };
+
 
     default: return state;
   }
