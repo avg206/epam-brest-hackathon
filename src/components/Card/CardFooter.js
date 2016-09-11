@@ -20,7 +20,7 @@ const CardFooter = (props) => {
     props.dispatch(deleteTask(props.task));
   };
 
-  switch (parseInt(props.task.state, 10)) {
+  switch (props.task.state) {
     case 1:
       return (
         <div className="extra content">

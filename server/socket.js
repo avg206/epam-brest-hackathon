@@ -19,24 +19,16 @@ const checkUser = (name, task) => {
   return 0;
 };
 
-const updateTask = (task, update) => {
+const updateTask = (name, task, update) => {
   const permissions = checkUser(name, task);
   const checkPosition = update.state !== task.state;
   const checkAssigne = update.assigne !== task.assigne && task.assigne && !update.assigne;
   const assigne = update.assigne && !task.assigne;
   const comment = update.commennt !== task.comment;
 
-  if ((permissions === 1 && assigne)
-    || (permissions > 2 && checkAssigne)) {
-    return { assigne: update.assigne };
-  }
-
-  if (permissions > 2 && checkPosition) {
-    return { state: update.state };
-  }
-
-  if (permissions > 2 && comment) {
-    return { comment: update.comment };
+  if (((permissions === 1 && assigne) || (permissions > 2 && checkAssigne))
+    || (permissions > 1 && checkPosition) || (permissions > 2 && comment)) {
+    return 1;
   }
 
   return null;
@@ -67,23 +59,26 @@ io.on('connect', (so) => {
     });
 
     so.on('delete task', async(id) => {
-      const deleteTask = await Task.findOne(id);
+      const deleteTask = await Task.findOne({ _id: id });
+      const permissions = checkUser(name, deleteTask);
 
-      if (!checkUser(name, deleteTask) || checkUser(name, deleteTask) === 3) return;
+      if (!permissions || permissions === 3) return;
 
       await deleteTask.remove();
+
       io.emit('delete task', id);
     });
 
     so.on('update task', async(update) => {
-      let task = await Task.findOne({ _id: update._id });
-      const updateField = updateTask(task, update);
+      const task = await Task.findOne({ _id: update._id });
+      const checkField = updateTask(name, task, update);
 
-      if (!task) so.emit('error', 'Task deleted');
+      if (!checkField || !task) return;
 
-      if (!updateField) return;
+      task.assigne = update.assigne;
+      task.state = update.state;
+      task.comment = update.comment;
 
-      task = Object.assigne({}, task._doc, updateField);
       await task.save();
       io.emit('update task', task);
     });

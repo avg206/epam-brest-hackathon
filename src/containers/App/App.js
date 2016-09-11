@@ -6,9 +6,9 @@ import Cards from './../../components/Cards';
 import AddForm from './../../containers/AddForm';
 
 const App = ({ tasks, addPopup }) => {
-  const tasks1 = tasks.filter((x) => x.state === '1') || [];
-  const tasks2 = tasks.filter((x) => x.state === '2') || [];
-  const tasks3 = tasks.filter((x) => x.state === '3') || [];
+  const tasks1 = tasks.filter((x) => x.state === 1) || [];
+  const tasks2 = tasks.filter((x) => x.state === 2) || [];
+  const tasks3 = tasks.filter((x) => x.state === 3) || [];
 
   return (
     <div className="ui container">
@@ -53,4 +53,3 @@ const mapStateTpProps = (state) => ({
 });
 
 export default connect(mapStateTpProps)(App);
-

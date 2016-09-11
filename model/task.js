@@ -11,7 +11,7 @@ const Task = new Schema({
   title: String,
   text: String,
   time: String,
-  state: String,
+  state: Number,
   comment: String,
 });
 
