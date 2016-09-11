@@ -12,8 +12,8 @@ const checkUser = (name, task) => {
   if ((name === task.creator && name === task.assigne)
     || name === 'Ivan Danilevich') return 4;
 
-  if (name === task.creator) return 2;
   if (name === task.assigne) return 3;
+  if (name === task.creator) return 2;
   if (name) return 1;
 
   return 0;
