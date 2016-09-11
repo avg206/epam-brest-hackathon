@@ -10,10 +10,11 @@ const io = socket();
 const authentication = (token) => jwt.verify(token, 'task');
 const checkUser = (name, task) => {
   if ((name === task.creator && name === task.assigne)
-    || name === 'Ivan Danilevich') return 3;
+    || name === 'Ivan Danilevich') return 4;
 
-  if (name === task.creator) return 1;
-  if (name === task.assigne) return 2;
+  if (name === task.creator) return 2;
+  if (name === task.assigne) return 3;
+  if (name) return 1;
 
   return 0;
 };
@@ -23,14 +24,19 @@ const updateTask = (task, update) => {
   const checkPosition = update.state !== task.state;
   const checkAssigne = update.assigne !== task.assigne && task.assigne && !update.assigne;
   const assigne = update.assigne && !task.assigne;
+  const comment = update.commennt !== task.comment;
 
-  if ((!permissions && assigne)
-    || (permissions > 1 && checkAssigne)) {
-    return Object.assigne({}, task._doc, { assigne: update.assigne });
+  if ((permissions === 1 && assigne)
+    || (permissions > 2 && checkAssigne)) {
+    return { assigne: update.assigne };
   }
 
-  if (permissions > 1 && checkPosition) {
-    return Object.assigne({}, task._doc, { state: update.state });
+  if (permissions > 2 && checkPosition) {
+    return { state: update.state };
+  }
+
+  if (permissions > 2 && comment) {
+    return { comment: update.comment };
   }
 
   return null;
@@ -63,7 +69,7 @@ io.on('connect', (so) => {
     so.on('delete task', async(id) => {
       const deleteTask = await Task.findOne(id);
 
-      if (checkUser(name, deleteTask) !== 1) return;
+      if (!checkUser(name, deleteTask) || checkUser(name, deleteTask) === 3) return;
 
       await deleteTask.remove();
       io.emit('delete task', id);
@@ -71,13 +77,13 @@ io.on('connect', (so) => {
 
     so.on('update task', async(update) => {
       let task = await Task.findOne({ _id: update._id });
+      const updateField = updateTask(task, update);
 
       if (!task) so.emit('error', 'Task deleted');
 
-      task = updateTask(task, update);
+      if (!updateField) return;
 
-      if (!task) return;
-
+      task = Object.assigne({}, task._doc, updateField);
       await task.save();
       io.emit('update task', task);
     });

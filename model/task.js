@@ -12,6 +12,7 @@ const Task = new Schema({
   text: String,
   time: String,
   state: String,
+  comment: String,
 });
 
 export default mongoose.model('Task', Task);
