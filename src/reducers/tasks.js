@@ -11,7 +11,7 @@ export default (state = initialState, action) => {
       return { ...state, list: [...action.tasks] };
 
     case constants.SAVE_NEW_TASK:
-      return { ...state, list: [...state, action.task] };
+      return { ...state, list: [...state.list, action.task] };
 
     case constants.SAVE_UPDATED_TASK:
       return {
