@@ -1,7 +1,7 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
-import { moveTaskToProgress, moveTaskToTODO, moveTaskToDone, deleteTask } from '../../actions';
+import { moveTaskToProgress, moveTaskToTODO, moveTaskToDone, deleteTask, assigne } from '../../actions';
 
 const CardFooter = (props) => {
   const moveToProgress = () => {
@@ -20,7 +20,22 @@ const CardFooter = (props) => {
     props.dispatch(deleteTask(props.task));
   };
 
-  switch (parseInt(props.task.state, 10)) {
+  const addAssign = () => {
+    props.dispatch(assigne(props.task));
+  };
+
+  switch (props.task.state) {
+    case 0:
+      return (
+        <div className="extra content">
+          <div className="ui two buttons">
+            <div className="ui basic green button" onClick={addAssign}>
+              Assign to me
+            </div>
+          </div>
+        </div>
+      );
+
     case 1:
       return (
         <div className="extra content">

@@ -1,20 +1,21 @@
 import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
+import { openAddForm } from '../../actions';
 import Navbar from './../../containers/Navbar';
 import Cards from './../../components/Cards';
 import AddForm from './../../containers/AddForm';
 import TasksFilter from './../../containers/TasksFilter';
 
-const App = ({ tasks, addPopup }) => {
-  const tasks1 = tasks.filter((x) => x.state === '1') || [];
-  const tasks2 = tasks.filter((x) => x.state === '2') || [];
-  const tasks3 = tasks.filter((x) => x.state === '3') || [];
+const App = (props) => {
+  const tasks1 = props.tasks.filter((x) => x.state === 1 || x.state === 0) || [];
+  const tasks2 = props.tasks.filter((x) => x.state === 2) || [];
+  const tasks3 = props.tasks.filter((x) => x.state === 3) || [];
 
   return (
     <div className="ui container">
       <Navbar />
-      {addPopup ? <AddForm /> : null}
+      {props.addPopup ? <AddForm /> : null}
 
       <TasksFilter />
 
@@ -23,7 +24,17 @@ const App = ({ tasks, addPopup }) => {
           <div className="column-title">
             <a className="ui large tag red label">Items in ToDo</a>
           </div>
-
+          <div className="ui fluid card">
+            <div className="content">
+              <div className="extra content">
+                <div className="ui two buttons">
+                  <div className="ui basic green button" onClick={props.openForm}>
+                    Add Item
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <Cards tasks={tasks1} />
         </div>
         <div className="column">
@@ -55,5 +66,8 @@ const mapStateTpProps = (state) => ({
   addPopup: state.ui.addPopup,
 });
 
-export default connect(mapStateTpProps)(App);
+const mapDispatchToProps = (dispatch) => ({
+  openForm: () => dispatch(openAddForm()),
+});
 
+export default connect(mapStateTpProps, mapDispatchToProps)(App);
