@@ -63,7 +63,7 @@ io.on('connect', (so) => {
       const deleteTask = await Task.findOne({ _id: id });
       const permissions = checkUser(name, deleteTask);
 
-      if (!permissions || permissions === 3) return;
+      if (permissions !== 2) return;
 
       await deleteTask.remove();
 
