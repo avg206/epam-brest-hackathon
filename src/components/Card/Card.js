@@ -7,6 +7,7 @@ const Card = (props) => {
   const assigne = (
     <div className="extra content">
       <span className="right floated time">
+        <div className="mini ui basic red button"><i className="remove user icon"/></div>
         <i className="user icon" /> {props.task.assigne}
       </span>
       <strong>Assigned:</strong>
