@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react';
 import { connect } from 'react-redux';
 
 import { openAddForm } from '../../actions';
-import Navbar from './../../containers/Navbar';
+import Navbar from './../../components/Navbar';
 import Cards from './../../components/Cards';
 import AddForm from './../../containers/AddForm';
 import TasksFilter from './../../containers/TasksFilter';
@@ -59,10 +59,29 @@ const App = (props) => {
 App.propTypes = {
   tasks: PropTypes.array.isRequired,
   addPopup: PropTypes.bool.isRequired,
+  openForm: PropTypes.func.isRequired,
+};
+
+const filterTasks = (tasks, filter, userName) => {
+  switch (filter) {
+    case 0:
+      return tasks;
+
+    case 1:
+      return tasks.filter((x) => !x.assigne);
+
+    case 2:
+      return tasks.filter((x) => x.creator === userName);
+
+    case 3:
+      return tasks.filter((x) => x.assigne === userName);
+
+    default: return [];
+  }
 };
 
 const mapStateTpProps = (state) => ({
-  tasks: state.tasks.list,
+  tasks: filterTasks(state.tasks.list, state.tasks.filter, state.user.name),
   addPopup: state.ui.addPopup,
 });
 
