@@ -1,4 +1,7 @@
 [
-  {"user": "Alena Orgish", "name": "Stationery"},
-  {"user": "Ivan Danilevich", "name": "IT"}
+  {"user": "", "name": "Buy"},
+  {"user": "", "name": "Sell"},
+  {"employeeId": 4060741400009279201, "user": "Natallia Melekhavets", "name": "News"},
+  {"employeeId": 4000741400005362095, "user": "Alena Orgish", "name": "Stationery"},
+  {"employeeId": 4060741400006685361, "user": "Ivan Danilevich", "name": "IT"}
 ]

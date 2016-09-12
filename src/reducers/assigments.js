@@ -1,6 +1,6 @@
 import * as constants from '../constants';
-
-const initialState = [];
+import defaultAssigments from '../../config/assigne.json';
+const initialState = defaultAssigments;
 
 export default (state = initialState, action) => {
   switch (action.type) {
